@@ -1,0 +1,11 @@
+/* Hide all divs at start
+We'll use javascript to selectively display divs. */
+body > div {
+    display: none;
+  }
+  
+  #root {
+    width: 400px;
+  }
+  
+  #events{align-items: right;}
