@@ -1,11 +1,4 @@
-/* Hide all divs at start
-We'll use javascript to selectively display divs. */
-body > div {
-    display: none;
-  }
+/* Hide Divs on Start */
+
+/* Set the width for our root */  
   
-  #root {
-    width: 400px;
-  }
-  
-  #events{align-items: right;}
