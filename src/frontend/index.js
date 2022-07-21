@@ -9,29 +9,62 @@ let room;
 // Create a function that handles our 'login' form
   async function joinwithusername(){
     let username = $("usernameinput").value.trim();
-    console.log(username);
+    console.log("joined as "+username);
     
     try{
       let tokens = await axios.post(backendurl+"/get_token",{
         user_name:username
       })
-    
-    let token = tokens.data.token;
-    console.log(token)
+
+      let token = tokens.data.token;
+      console.log("Setting up RTC session");
+        room = new SignalWire.Video.RoomSession({
+          token,
+          rootElement: document.getElementById("root"),
+          audio:true,
+          video:true
+        });
+  
+        await room.join();
+        $('videoroom').style.display="block"
+        $('getusername').style.display="none"
+    }
+    catch(e){
+      console.log(e)
+    }
   }
-  catch(e){
-    console.log(e);
+
+  async function leave_room(){
+    await room.hangup();
+    $('videoroom').style.display="none"
+    $('getusername').style.display="block"
   }
-}
 
-// Create a function to allow users to leave the call.
+  async function audio_mute(){
+    await room.audioMute()
+    console.log("muted")
+  }
 
-// Create a function that allows users to share their screen
+  async function audio_unmute(){
+    await room.audioUnmute()
+    console.log("unmuted")
+  }
 
-// Create functions that allow users to interact with our video room
+  async function video_mute(){
+    await room.videoMute()
+    console.log("muted")
+  }
 
-  //Audio Mute and Unmute
+  async function video_unmute(){
+    await room.videoUnmute()
+    console.log("unmuted")
+  }
 
-  //Video Mute and Unmute
-
-//Make sure we land on the correct page when loading
+  let screenShareObj;
+  async function screen_share(){
+    if (room===undefined) return;
+    screenShareObj = await room.startScreenShare({
+      audio:true,
+      video:true
+    })
+  }

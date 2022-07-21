@@ -25,7 +25,16 @@
         <input type="submit" value="join" />
         </form>
     </div>
-
-    <div id="loading">Loading..</div>
+      
+    <div id="videoroom" style="display:none;">
+      <div id="root" style="width:720px;">  </div>
+      <button onclick="audio_mute()">Audio Mute</button>
+      <button onclick="audio_unmute()">Audio Unmute</button>
+      <button onclick="video_mute()">Video Mute</button>
+      <button onclick="video_unmute()">Video Unmute</button>
+      <button onclick="screen_share()">Share Screen</button>
+      <button onclick="leave_room()">Leave</button>
+    </div>
+    </div>
   </body>
 </html>
